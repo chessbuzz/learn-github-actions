@@ -1,10 +1,30 @@
+
+# name of the action
 name: learn-github-actions
+
+# action triggers  on push
 on: [push]
+
+# groups all the jobs that run in the learn-github-actions workflow file
 jobs:
+
+  # defines the name of the job
   check-bats-version:
+    # configures the job to run an ubuntu linux (container) runner.
     runs-on: ubuntu-latest
+
+    # groups together all of the steps that run in the job.
+    # each section is a seperate action or shell command
     steps:
+
+      # users community action checkout. checks out your repo and downloads to runner
       - uses: actions/checkout@v2
+
+      # installs the node software on the runner giving you access to npm command
       - uses: actions/setup-node@v1
+
+      # run keyword tells the job to execute a command on the runner
       - run: npm install -g bats
+
+      # execute command to get the version of bats
       - run: bats -v
